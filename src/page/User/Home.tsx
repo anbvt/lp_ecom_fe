@@ -42,13 +42,53 @@ const Home = () => {
                   }
                 </Row>
               </div>
-              <div className="row mt-1">
-                <span className="text-center">
-                  <button style={{ fontSize: "30px" }} onClick={() => { setPage(0) }} className="btn border-0 me-3"><AiFillFastBackward /></button>
-                  <button style={{ fontSize: "30px" }} onClick={() => { if (page > 0) setPage(page - 1) }} className="btn border-0 me-3"><AiOutlineBackward /></button>
-                  <button style={{ fontSize: "30px" }} onClick={() => { if (page < data.totalPages - 1) setPage(page + 1) }} className="btn border-0 me-3"><AiFillForward /></button>
-                  <button style={{ fontSize: "30px" }} onClick={() => { setPage(data.totalPages - 1) }} className="btn border-0"><AiFillFastForward /></button>
-                </span>
+              <div className="row mt-5">
+                <div className="col d-flex justify-content-center">
+
+                  <div className="d-flex align-items-center gap-3 bg-white px-4 py-2 rounded-pill shadow-sm">
+
+                    {/* First */}
+                    <button
+                      className="btn btn-light rounded-circle"
+                      disabled={page === 0}
+                      onClick={() => setPage(0)}
+                    >
+                      <AiFillFastBackward />
+                    </button>
+
+                    {/* Prev */}
+                    <button
+                      className="btn btn-light rounded-circle"
+                      disabled={page === 0}
+                      onClick={() => page > 0 && setPage(page - 1)}
+                    >
+                      <AiOutlineBackward />
+                    </button>
+
+                    {/* Page indicator */}
+                    <span className="fw-bold px-3">
+                      {page + 1} <span className="text-muted">/ {data.totalPages}</span>
+                    </span>
+
+                    {/* Next */}
+                    <button
+                      className="btn btn-light rounded-circle"
+                      disabled={page === data.totalPages - 1}
+                      onClick={() => page < data.totalPages - 1 && setPage(page + 1)}
+                    >
+                      <AiFillForward />
+                    </button>
+
+                    {/* Last */}
+                    <button
+                      className="btn btn-light rounded-circle"
+                      disabled={page === data.totalPages - 1}
+                      onClick={() => setPage(data.totalPages - 1)}
+                    >
+                      <AiFillFastForward />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

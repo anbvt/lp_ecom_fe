@@ -1,0 +1,30 @@
+.login-container {
+  min-height: 100vh;
+}
+
+.login-left {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXR7Lsng_N5_yCenkBydLI_daDLRSSCCM2PBdiVKcYfwVvbcHz0p8dguvcA8s6ta8QLfrRi1ceDqCnvlCS5CleDTCnbcWGdxS6t0hF_Pw8p9-gQKqKCIgYO6rbfBriQrp0_-CToPWVD6HeIeMWvT2_-KeZMQmdUxLVEfFPw7KEWkgs8XHKtW1pXHn-1q2vC3G4CkuaWBUzIEPm1kkAS65mo7sDXA7WMuNBiE_7b-EWJ0IRKu8fG-0nBMN8ZIIglnF9rD0bPL3OiAI");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.login-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 20, 0.6);
+}
+
+.login-overlay {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding: 3rem;
+  max-width: 500px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+}

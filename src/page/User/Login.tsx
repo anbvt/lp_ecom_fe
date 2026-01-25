@@ -3,86 +3,111 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginProps } from "src/common/types/LoginProps";
 import { useFetch } from "src/util/CustomHook";
 import Input from "src/components/Input";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { notification } from 'antd';
+import { Link, useNavigate } from "react-router-dom";
+import { notification } from "antd";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import "./css/LoginPage.css";
 
 const Login = () => {
-    const [api, contextHolder] = notification.useNotification();
-    const navigate = useNavigate();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [cookie, setCookie] = useCookies(['user']);
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginProps>();
-    const onSubmit: SubmitHandler<LoginProps> = (data) => {
-        async function init() {
-            await useFetch.post("/api/auth/login", data).then(result => {
-                setCookie("user", JSON.stringify(result.data));
-                api.success({ message: "Đăng nhập thành công !", description: "Welcome to Zuhot eCommerce" })
-                setTimeout(() => {
-                    navigate("/");
-                }, 2000);
-            }).catch(errors => api.error({ message: errors.response.data.message }))
-        }
-        init();
-    };
+  const [api, contextHolder] = notification.useNotification();
+  const navigate = useNavigate();
+  const [, setCookie] = useCookies(["user"]);
 
-    return (
-        <>
-            {contextHolder}
-            <div className="container-fluid bg-white" style={{ paddingBlock: "120px", height: "100vh", fontFamily: 'courier, arial, helvetica' }}>
-                <div className="row">
-                    <div className="col-md-1 col-lg-1"></div>
-                    <div className="col-12 col-sm-12 col-md-6 col-lg-7" style={{ backgroundImage: `url(https://e1.pxfuel.com/desktop-wallpaper/782/567/desktop-wallpaper-laptop-repair-computer-shop-background.jpg)`, objectFit: "fill", backgroundRepeat: "no-repeat" }}></div>
-                    <div className="col-12 col-sm-12 col-md-4 col-lg-3 bg-white">
-                        <form className="m-auto p-4 font-monospace text-dark py-5" onSubmit={handleSubmit(onSubmit)}>
-                            <h1 className="text-center text-uppercase fw-bolder" style={{ fontFamily: 'courier, arial, helvetica' }}>Login</h1>
-                            <hr />
-                            {/* Email input */}
-                            <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="email">Email address</label>
-                                <Input type="email" name="email" id="email" className="form-control" register={register("email", {
-                                    required: {
-                                        value: true,
-                                        message: "Bạn không được bỏ trống"
-                                    }
-                                })} />
-                                <div className="text-danger mt-1">{errors.email?.message}</div>
-                            </div>
-                            {/* Password input */}
-                            <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="form2Example2">Password</label>
-                                <Input type="password" name="password" id="password" className="form-control" register={register("password", {
-                                    required: {
-                                        value: true,
-                                        message: "Bạn không được bỏ trống"
-                                    }
-                                })} />
-                                <div className="text-danger mt-1">{errors.password?.message}</div>
-                            </div>
-                            {/* 2 column grid layout for inline styling */}
-                            <div className="row mb-4">
-                                <div className="col d-flex justify-content-center">
-                                    {/* Checkbox */}
-                                    <div className="form-check">
-                                        <Input className="form-check-input" type="checkbox" name="remember" id="remember" register={register("remember")} />
-                                        <label className="form-check-label" htmlFor="form2Example31"> Remember me </label>
-                                    </div>
-                                    {/* Register */}
-                                    <div className="form-check">
-                                        <Link to="/registration" className="form-check-label"> Đăng ký </Link>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Submit button */}
-                            <div className="row">
-                                <button type="submit" className="btn btn-default border rounded-3 btn-block mb-4">Sign in</button>
-                            </div>
-                        </form>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginProps>();
+
+  const onSubmit: SubmitHandler<LoginProps> = async (data) => {
+    try {
+      const result = await useFetch.post("/api/auth/login", data);
+      setCookie("user", JSON.stringify(result.data));
+      api.success({
+        message: "Đăng nhập thành công!",
+        description: "Welcome to Zuhot eCommerce",
+      });
+      setTimeout(() => navigate("/"), 1500);
+    } catch (err: any) {
+      api.error({
+        message: err.response?.data?.message || "Login failed",
+      });
+    }
+  };
+
+  return (
+    <>
+      {contextHolder}
+
+      <div className="login-container">
+        <Container>
+          <Row className="justify-content-center align-items-center min-vh-100">
+            <Col xs={12} sm={10} md={6} lg={4}>
+              <div className="login-form p-4 shadow rounded bg-white">
+                <h1 className="text-center fw-bolder text-uppercase mb-2">
+                  Login
+                </h1>
+                <p className="text-muted text-center mb-4">
+                  Enter your credentials to access your account
+                </p>
+
+                <Form onSubmit={handleSubmit(onSubmit)}>
+                  {/* EMAIL */}
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email address</Form.Label>
+                    <Input
+                      type="email"
+                      name="email"
+                      className="form-control"
+                      register={register("email", {
+                        required: "Bạn không được bỏ trống",
+                      })}
+                    />
+                    <div className="text-danger mt-1">
+                      {errors.email?.message}
                     </div>
-                    <div className="col-md-1 col-lg-1"></div>
-                </div>
-            </div>
-        </>
-    );
-}
+                  </Form.Group>
+
+                  {/* PASSWORD */}
+                  <Form.Group className="mb-3">
+                    <Form.Label>Password</Form.Label>
+                    <Input
+                      type="password"
+                      name="password"
+                      className="form-control"
+                      register={register("password", {
+                        required: "Bạn không được bỏ trống",
+                      })}
+                    />
+                    <div className="text-danger mt-1">
+                      {errors.password?.message}
+                    </div>
+                  </Form.Group>
+
+                  {/* OPTIONS */}
+                  <Row className="mb-3">
+                    <Col className="d-flex justify-content-between">
+                      <Form.Check
+                        type="checkbox"
+                        label="Remember me"
+                        {...register("remember")}
+                      />
+                      <Link to="/registration">Đăng ký</Link>
+                    </Col>
+                  </Row>
+
+                  {/* SUBMIT */}
+                  <Button type="submit" className="w-100">
+                    Sign in
+                  </Button>
+                </Form>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </>
+  );
+};
+
 export default Login;

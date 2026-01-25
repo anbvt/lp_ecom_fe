@@ -55,100 +55,80 @@ const Search = () => {
     return (
         <>
             <UserLayout>
-                {!products ? <div className="container w-100 bg-white mx-auto text-center" style={{ height: "500px", paddingTop: "200px" }}><SyncLoader color="#36d7b7" className="text-center" style={{ marginTop: "200" }} /></div> : <div className="card mb-3">
-                    <div className="card-body">
-                        <div className="p-3 m-auto bg-white text-dark font-monospace" >
-                            <div className="container">
-                                <form action="" onSubmit={handleSubmit(onSubmit)}>
-                                    <div className="row w-75 m-auto">
-                                        <div className="col">
-                                            <SelectInput id='brand' defaultValue={""} name="brand" className="form-select" register={register("brandid")} options={
-                                                data?.brands.map((value, key) => (
-                                                    {
-                                                        value: key + 1,
-                                                        label: value.name
-                                                    }
-                                                ))
-                                            } />
-                                        </div>
-                                        <div className="col">
-                                            <SelectInput id='ram' defaultValue={""} name="ram" className="form-select" register={register("ram")} options={
-                                                ram.map((value) => (
-                                                    {
-                                                        value: value,
-                                                        label: value
-                                                    }
-                                                ))
-                                            } />
-                                        </div>
-                                        <div className="col">
-                                            <SelectInput id='rom' defaultValue={""} name="rom" className="form-select" register={register("rom")} options={
-                                                rom.map((value) => (
-                                                    {
-                                                        value: value,
-                                                        label: value
-                                                    }
-                                                ))
-                                            } />
-                                        </div>
-                                        <div className="col">
-                                            <SelectInput id='display' defaultValue={""} name="display" className="form-select" register={register("display")} options={
-                                                display.map((value) => (
-                                                    {
-                                                        value: value,
-                                                        label: value
-                                                    }
-                                                ))
-                                            } />
-                                        </div>
-                                        <div className="col">
-                                            <SelectInput id='os' defaultValue={""} name="os" className="form-select" register={register("os")} options={
-                                                os.map((value) => (
-                                                    {
-                                                        value: value,
-                                                        label: value
-                                                    }
-                                                ))
-                                            } />
-                                        </div>
-                                        <div className="col-1">
-                                            <button type="submit" className="btn btn-default"><i className="bi bi-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                                {flag === "list" &&
-                                    <>
-                                        <div className="row w-100">{products?.content?.map((value: any, key: any) => (
-                                            <div key={key} className="col-4">
-                                                <Card id={value.id} className="mt-3" data={value} />
-                                            </div>
-                                        ))}</div>
-                                        <div className="row mt-1">
-                                            <span className="text-center">
-                                                <button style={{ fontSize: "30px" }} onClick={() => { setPage(0) }} className="btn text-primary border-0 me-3"><AiFillFastBackward /></button>
-                                                <button style={{ fontSize: "30px" }} onClick={() => { if (page > 0) setPage(page - 1) }} className="btn text-primary border-0 me-3"><AiOutlineBackward /></button>
-                                                <button style={{ fontSize: "30px" }} onClick={() => { if (page < products.totalPages - 1) setPage(page + 1) }} className="btn text-primary border-0 me-3"><AiFillForward /></button>
-                                                <button style={{ fontSize: "30px" }} onClick={() => { setPage(products.totalPages - 1) }} className="btn text-primary border-0"><AiFillFastForward /></button>
-                                            </span>
-                                        </div>
-                                    </>
-                                }
-                                {flag === "filter" &&
-                                    <>
-                                        <div className="row w-100">{filter?.map((value, key) => (
-                                            <div key={key} className="col-4">
-                                                <Card id={value.id} className="mt-3" data={value} />
-                                            </div>
-                                        ))}</div>
-                                    </>
-                                }
-                            </div>
-                        </div >
+    {!products ? (
+        <div className="vh-100 d-flex align-items-center justify-content-center">
+            <SyncLoader color="#3b82f6" />
+        </div>
+    ) : (
+        <div className="container-fluid py-4">
+            <div className="row">
+                {/* FILTER SIDEBAR */}
+                <div className="col-md-3">
+                    <div className="card shadow-sm border-0 rounded-4 p-3 sticky-top" style={{ top: "80px" }}>
+                        <h5 className="fw-bold mb-3 text-primary">🔍 Filter</h5>
+
+                        <form onSubmit={handleSubmit(onSubmit)} className="d-grid gap-3">
+
+                            <SelectInput id="brand" name="brand" register={register("brandid")} defaultValue=""
+                                            options={data.brands.map((b, i) => ({ value: i + 1, label: b.name }))} className={""} />
+
+                            <SelectInput id="ram" name="ram" register={register("ram")} defaultValue=""
+                                            options={ram.map(v => ({ value: v, label: v }))} className={""} />
+
+                            <SelectInput id="rom" name="rom" register={register("rom")} defaultValue=""
+                                            options={rom.map(v => ({ value: v, label: v }))} className={""} />
+
+                            <SelectInput id="display" name="display" register={register("display")} defaultValue=""
+                                            options={display.map(v => ({ value: v, label: v }))} className={""} />
+
+                            <SelectInput id="os" name="os" register={register("os")} defaultValue=""
+                                            options={os.map(v => ({ value: v, label: v }))} className={""} />
+
+                            <button className="btn btn-primary w-100 py-2 rounded-pill">
+                                <i className="bi bi-search me-2"></i> Search
+                            </button>
+                        </form>
                     </div>
                 </div>
-                }
-            </UserLayout>
+
+                {/* PRODUCT GRID */}
+                <div className="col-md-9">
+                    <div className="row g-4">
+                        {(flag === "list" ? products.content : filter)?.map((value: any, key: number) => (
+                            <div key={key} className="col-lg-4 col-md-6">
+                                <Card id={value.id} data={value} />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* PAGINATION */}
+                    {flag === "list" && (
+                        <div className="d-flex justify-content-center align-items-center mt-4 gap-3">
+                            <button onClick={() => setPage(0)} className="btn btn-light shadow-sm">
+                                <AiFillFastBackward />
+                            </button>
+                            <button onClick={() => page > 0 && setPage(page - 1)} className="btn btn-light shadow-sm">
+                                <AiOutlineBackward />
+                            </button>
+
+                            <span className="fw-bold">
+                                {page + 1} / {products.totalPages}
+                            </span>
+
+                            <button onClick={() => page < products.totalPages - 1 && setPage(page + 1)} className="btn btn-light shadow-sm">
+                                <AiFillForward />
+                            </button>
+                            <button onClick={() => setPage(products.totalPages - 1)} className="btn btn-light shadow-sm">
+                                <AiFillFastForward />
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    )}
+</UserLayout>
+
         </>
     );
 }
