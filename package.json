@@ -57,5 +57,8 @@
   "devDependencies": {
     "@types/jquery": "^3.5.16",
     "@types/react-highlight-words": "^0.16.4"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }
