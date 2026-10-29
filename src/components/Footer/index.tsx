@@ -1,132 +1,163 @@
 
 const Footer = () => {
+    const currentYear = new Date().getFullYear();
+
     return (
-        <footer className="bg-dark">
-            <div className="container my-5">
-                <footer
-                    className="text-center text-lg-start text-white"
-                    style={{ backgroundColor: "#1c2331" }}
+        <footer className="bg-dark text-white">
+            <div className="container-fluid p-0">
+                {/* Social media */}
+                <section
+                    className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 p-4"
+                    style={{ backgroundColor: "#6351ce" }}
                 >
-                    {/* Social media */}
-                    <section
-                        className="d-flex justify-content-between p-4"
-                        style={{ backgroundColor: "#6351ce" }}
-                    >
-                        <div className="me-5">
-                            <span>Get connected with us on social networks:</span>
-                        </div>
+                    <span>
+                        Stay connected with ZUHOT Laptop
+                    </span>
 
-                        <div>
-                            <a href="#" className="text-white me-4">
-                                <i className="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" className="text-white me-4">
-                                <i className="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" className="text-white me-4">
-                                <i className="fab fa-google"></i>
-                            </a>
-                            <a href="#" className="text-white me-4">
-                                <i className="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" className="text-white me-4">
-                                <i className="fab fa-linkedin"></i>
-                            </a>
-                            <a href="#" className="text-white me-4">
-                                <i className="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </section>
+                    <div className="d-flex gap-4">
+                        <a
+                            href="https://github.com/anbvt"
+                            className="text-white"
+                            aria-label="GitHub"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <i className="fab fa-github fa-lg"></i>
+                        </a>
 
-                    {/* Links */}
-                    <section>
-                        <div className="container text-center text-md-start mt-5">
-                            <div className="row mt-3">
-                                {/* Company */}
-                                <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                                    <h6 className="text-uppercase fw-bold">Company name</h6>
-                                    <hr
-                                        className="mb-4 mt-0 d-inline-block mx-auto"
-                                        style={{
-                                            width: "60px",
-                                            backgroundColor: "#7c4dff",
-                                            height: "2px",
-                                        }}
-                                    />
-                                    <p>
-                                        Here you can use rows and columns to organize your footer
-                                        content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit.
-                                    </p>
-                                </div>
-
-                                {/* Products */}
-                                <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                                    <h6 className="text-uppercase fw-bold">Products</h6>
-                                    <hr
-                                        className="mb-4 mt-0 d-inline-block mx-auto"
-                                        style={{
-                                            width: "60px",
-                                            backgroundColor: "#7c4dff",
-                                            height: "2px",
-                                        }}
-                                    />
-                                    <p><a href="#" className="text-white">MDBootstrap</a></p>
-                                    <p><a href="#" className="text-white">MDWordPress</a></p>
-                                    <p><a href="#" className="text-white">BrandFlow</a></p>
-                                    <p><a href="#" className="text-white">Bootstrap Angular</a></p>
-                                </div>
-
-                                {/* Useful links */}
-                                <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                                    <h6 className="text-uppercase fw-bold">Useful links</h6>
-                                    <hr
-                                        className="mb-4 mt-0 d-inline-block mx-auto"
-                                        style={{
-                                            width: "60px",
-                                            backgroundColor: "#7c4dff",
-                                            height: "2px",
-                                        }}
-                                    />
-                                    <p><a href="#" className="text-white">Your Account</a></p>
-                                    <p><a href="#" className="text-white">Become an Affiliate</a></p>
-                                    <p><a href="#" className="text-white">Shipping Rates</a></p>
-                                    <p><a href="#" className="text-white">Help</a></p>
-                                </div>
-
-                                {/* Contact */}
-                                <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                                    <h6 className="text-uppercase fw-bold">Contact</h6>
-                                    <hr
-                                        className="mb-4 mt-0 d-inline-block mx-auto"
-                                        style={{
-                                            width: "60px",
-                                            backgroundColor: "#7c4dff",
-                                            height: "2px",
-                                        }}
-                                    />
-                                    <p><i className="fas fa-home me-3"></i> New York, NY 10012, US</p>
-                                    <p><i className="fas fa-envelope me-3"></i> info@example.com</p>
-                                    <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                                    <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Copyright */}
-                    <div
-                        className="text-center p-3"
-                        style={{ backgroundColor: "rgba(0,0,0,0.2)" }}
-                    >
-                        © 2020 Copyright:{" "}
-                        <a className="text-white" href="https://mdbootstrap.com/">
-                            MDBootstrap.com
+                        <a
+                            href="https://www.linkedin.com/in/anbvt/"
+                            className="text-white"
+                            aria-label="LinkedIn"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <i className="fab fa-linkedin fa-lg"></i>
                         </a>
                     </div>
-                </footer>
+                </section>
+
+                {/* Footer links */}
+                <section className="container py-5">
+                    <div className="row g-4">
+                        {/* About */}
+                        <div className="col-md-6 col-lg-4">
+                            <h6 className="text-uppercase fw-bold">
+                                ZUHOT Laptop
+                            </h6>
+
+                            <hr
+                                className="mt-0 mb-4"
+                                style={{
+                                    width: "60px",
+                                    height: "2px",
+                                    backgroundColor: "#7c4dff",
+                                    border: 0,
+                                    opacity: 1,
+                                }}
+                            />
+
+                            <p className="text-white-50">
+                                Your destination for laptop shopping.
+                                Explore our laptop collection and find
+                                a device that suits your needs.
+                            </p>
+
+                            <a
+                                href="https://zuhot-laptop.vercel.app"
+                                className="text-white text-decoration-none"
+                            >
+                                Visit our website
+                                <i className="fas fa-arrow-up-right-from-square ms-2"></i>
+                            </a>
+                        </div>
+
+                        {/* Shopping */}
+                        <div className="col-md-6 col-lg-4">
+                            <h6 className="text-uppercase fw-bold">
+                                Shopping
+                            </h6>
+
+                            <hr
+                                className="mt-0 mb-4"
+                                style={{
+                                    width: "60px",
+                                    height: "2px",
+                                    backgroundColor: "#7c4dff",
+                                    border: 0,
+                                    opacity: 1,
+                                }}
+                            />
+
+                            <p className="text-white-50 mb-2">
+                                Browse laptops
+                            </p>
+                            <p className="text-white-50 mb-2">
+                                Compare your options
+                            </p>
+                            <p className="text-white-50 mb-2">
+                                Find a laptop for your needs
+                            </p>
+                        </div>
+
+                        {/* Project information */}
+                        <div className="col-md-6 col-lg-4">
+                            <h6 className="text-uppercase fw-bold">
+                                Project
+                            </h6>
+
+                            <hr
+                                className="mt-0 mb-4"
+                                style={{
+                                    width: "60px",
+                                    height: "2px",
+                                    backgroundColor: "#7c4dff",
+                                    border: 0,
+                                    opacity: 1,
+                                }}
+                            />
+
+                            <p className="text-white-50">
+                                A laptop e-commerce web application
+                                built with React, TypeScript and
+                                a Spring Boot backend.
+                            </p>
+
+                            <a
+                                href="https://github.com/anbvt/lp_ecom_fe"
+                                className="text-white text-decoration-none"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                Frontend source code
+                                <i className="fab fa-github ms-2"></i>
+                            </a>
+
+                            <p className="mt-3 mb-0">
+                                <a
+                                    href="https://github.com/anbvt/lp_ecom_be"
+                                    className="text-white text-decoration-none"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Backend source code
+                                    <i className="fab fa-github ms-2"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Copyright */}
+                <div
+                    className="text-center p-3"
+                    style={{ backgroundColor: "rgba(0,0,0,0.25)" }}
+                >
+                    © {currentYear} ZUHOT Laptop. All rights reserved.
+                </div>
             </div>
         </footer>
     );
-}
+};
+
 export default Footer;

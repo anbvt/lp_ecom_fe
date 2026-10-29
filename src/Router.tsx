@@ -11,7 +11,7 @@ import Home from "./page/User/Home";
 import Login from "./page/User/Login";
 import Registration from "./page/User/Registration";
 import DetailProduct from "./page/User/DetailProduct";
-import Search from "./page/User/Search";
+import Search from "./page/User/Search/Search";
 import CartPage from "./page/User/Cart/CartPage";
 import MyAccount from "./page/User/MyAccount";
 
