@@ -1,35 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Admin/Navbar";
 import SideMenu from "../Admin/Sidebar";
+import "./AdminLayout.css";
 
-const AdminLayout = ({ children }: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [cookie, setCookie] = useCookies(['admin']);
-    const router = useNavigate();
+const AdminLayout = ({ children }: { children: React.ReactNode }) => {
+    const [cookie] = useCookies(["admin"]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
     useEffect(() => {
         if (!cookie.admin) {
-            router("/admin/login")
+            navigate("/admin/login");
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    return (
-        <>
-            {
-                cookie.admin && <div className="container-fluid p-0" >
-                    <Navbar />
-                    <div className="row">
-                        <SideMenu />
-                        <div className="col">
-                            {children}
-                        </div>
-                    </div>
-                </div>
-            }
-        </>
+    }, [cookie.admin, navigate]);
 
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location.pathname]);
+
+    if (!cookie.admin) {
+        return null;
+    }
+
+    return (
+        <div className="admin-app">
+            <Navbar onMenuToggle={() => setIsMenuOpen((open) => !open)} />
+            <div className="admin-workspace">
+                <SideMenu isOpen={isMenuOpen} onNavigate={() => setIsMenuOpen(false)} />
+                <main className="admin-main">{children}</main>
+            </div>
+        </div>
     );
-}
+};
 
 export default AdminLayout;

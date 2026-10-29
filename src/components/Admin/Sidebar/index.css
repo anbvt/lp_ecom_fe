@@ -1,3 +1,149 @@
-a {
+.admin-sidebar {
+    display: flex;
+    min-height: calc(100vh - 70px);
+    flex-direction: column;
+    padding: 27px 15px 20px;
+    border-right: 1px solid #e8edf4;
+    background: #fff;
+}
+
+.admin-sidebar__section-label {
+    margin: 0 11px 13px;
+    color: #9aa5b5;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.admin-sidebar__nav {
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.admin-sidebar__link {
+    position: relative;
+    display: flex;
+    min-height: 45px;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
+    border-radius: 10px;
+    color: #677489;
+    font-size: 12px;
+    font-weight: 600;
     text-decoration: none;
+    transition: color 150ms ease, background 150ms ease;
+}
+
+.admin-sidebar__link > i {
+    width: 18px;
+    color: #8995a8;
+    font-size: 16px;
+    text-align: center;
+}
+
+.admin-sidebar__link:hover {
+    background: #f7f6fc;
+    color: #6047c7;
+}
+
+.admin-sidebar__link:hover > i,
+.admin-sidebar__link--active > i {
+    color: #6047c7;
+}
+
+.admin-sidebar__link--active {
+    background: #f2efff;
+    color: #5037b2;
+    font-weight: 750;
+}
+
+.admin-sidebar__active-indicator {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    bottom: 10px;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+    background: #6047c7;
+}
+
+.admin-sidebar__bottom {
+    margin-top: auto;
+    padding: 16px 13px;
+    border: 1px solid #ece8fb;
+    border-radius: 14px;
+    background: #faf9ff;
+}
+
+.admin-sidebar__help-icon {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 12px;
+    place-items: center;
+    border-radius: 10px;
+    background: #eee9ff;
+    color: #6047c7;
+    font-size: 16px;
+}
+
+.admin-sidebar__bottom strong {
+    color: #354052;
+    font-size: 11px;
+}
+
+.admin-sidebar__bottom p {
+    margin: 6px 0 11px;
+    color: #818ca0;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.admin-sidebar__bottom a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6047c7;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-sidebar__bottom a:hover {
+    color: #3f2a9e;
+}
+
+@media (max-width: 900px) {
+    .admin-sidebar {
+        position: fixed;
+        z-index: 1050;
+        top: 64px;
+        bottom: 0;
+        left: 0;
+        width: min(290px, 84vw);
+        min-height: 0;
+        overflow-y: auto;
+        box-shadow: 16px 0 35px rgba(20, 29, 48, 0.12);
+        transform: translateX(-105%);
+        transition: transform 180ms ease;
+    }
+
+    .admin-sidebar--open {
+        transform: translateX(0);
+    }
+
+    .admin-sidebar__bottom {
+        margin-top: 30px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-sidebar,
+    .admin-sidebar__link {
+        transition: none;
+    }
 }

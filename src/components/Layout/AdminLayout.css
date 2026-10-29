@@ -1,0 +1,45 @@
+.admin-app {
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+.admin-workspace {
+    display: grid;
+    min-height: calc(100vh - 70px);
+    grid-template-columns: 252px minmax(0, 1fr);
+}
+
+.admin-main {
+    min-width: 0;
+    padding: 32px clamp(20px, 3.2vw, 48px) 48px;
+}
+
+.admin-menu-backdrop {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .admin-workspace {
+        display: block;
+        min-height: calc(100vh - 64px);
+    }
+
+    .admin-main {
+        padding: 26px 22px 40px;
+    }
+
+    .admin-menu-backdrop {
+        position: fixed;
+        z-index: 1040;
+        inset: 64px 0 0;
+        display: block;
+        border: 0;
+        background: rgba(15, 23, 42, 0.42);
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-main {
+        padding: 22px 15px 32px;
+    }
+}

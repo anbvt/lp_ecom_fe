@@ -1,105 +1,68 @@
-import { AppstoreOutlined, CustomerServiceOutlined, OrderedListOutlined, SketchOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
-import React from 'react';
-import { FaEdit, FaHome, FaList, FaListAlt, FaUserAlt } from 'react-icons/fa';
-import { Link, useNavigation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
 import "./index.css";
 
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: 'group',
-): MenuItem {
-    return {
-        key,
-        icon,
-        children,
-        label,
-        type,
-    } as MenuItem;
+interface SideBarProps {
+    isOpen: boolean;
+    onNavigate: () => void;
 }
 
-const items: MenuProps['items'] = [
-    getItem("Trang chủ", "/admin", <FaHome />, [
-        {
-            label: (<Link to={"/admin"}>Thống Kê</Link>),
-            key: "/admin",
-            icon: <FaListAlt />
-        },
-        {
-            label: (<Link to={"/"}>Trang bán hàng</Link>),
-            key: "/admin",
-            icon: <FaHome />
-        }
-    ]),
-    { type: 'divider' },
-    getItem('Khách Hàng', 'sub1', <CustomerServiceOutlined />, [
-        {
-            label: (<Link to={"/admin/customer"}>Xem tất cả</Link>),
-            key: "/admin/customer",
-            icon: <FaList />
-        },
-        {
-            label: (<Link to={"/admin/customer"}>Quản lí</Link>),
-            key: "/admin/customer",
-            icon: <FaEdit />
-        }
-    ]),
-
-    getItem('Sản phẩm', 'sub2', <AppstoreOutlined />, [
-        {
-            label: (<Link to={"/admin/product"}>Xem tất cả</Link>),
-            key: "/admin/product",
-            icon: <FaList />
-        },
-        {
-            label: (<Link to={"/admin/product"}>Quản lí</Link>),
-            key: "/admin/product",
-            icon: <FaEdit />
-        }
-    ]),
-    getItem('Thương hiệu', 'sub3', <SketchOutlined />, [
-        {
-            label: (<Link to={"/admin/brands"}>Xem tất cả</Link>),
-            key: "/admin/brands",
-            icon: <FaList />
-        }
-    ]),
-    getItem('Đơn hàng', 'sub4', <OrderedListOutlined />, [
-        {
-            label: (<Link to={"/admin/order"}>Xem tất cả</Link>),
-            key: "/admin/order",
-            icon: <FaList />
-        },
-        getItem('Quản lí', '10', <FaEdit />)
-    ]),
-    getItem('Tài khoản', 'grp', null, [getItem('Thông tin tài khoản', '13', <FaUserAlt />), getItem('Đổi mật khẩu', '14', <FaEdit />)], 'group'),
+const navigationItems = [
+    { to: "/admin", label: "Tổng quan", icon: "bi-grid-1x2" },
+    { to: "/admin/order", label: "Đơn hàng", icon: "bi-receipt" },
+    { to: "/admin/product", label: "Sản phẩm", icon: "bi-laptop" },
+    { to: "/admin/brands", label: "Thương hiệu", icon: "bi-tags" },
+    { to: "/admin/customer", label: "Khách hàng", icon: "bi-people" },
 ];
 
-const SideBar: React.FC = () => {
-    const router = useNavigation();
-
-    const onClick: MenuProps['onClick'] = (e) => {
-        // router(e.key);
-        // router.location?.pathname
-    };
-
+const SideBar = ({ isOpen, onNavigate }: SideBarProps) => {
+    const location = useLocation();
 
     return (
         <>
-            <Menu
-                onClick={onClick}
-                style={{ width: 256 }}
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={[router.location?.pathname || "/admin"]}
-                mode="inline"
-                items={items}
-            />
+            {isOpen && (
+                <button
+                    className="admin-menu-backdrop"
+                    type="button"
+                    onClick={onNavigate}
+                    aria-label="Đóng menu quản trị"
+                />
+            )}
+            <aside className={`admin-sidebar${isOpen ? " admin-sidebar--open" : ""}`}>
+                <div className="admin-sidebar__section-label">MENU QUẢN LÝ</div>
+                <nav aria-label="Điều hướng quản trị">
+                    <ul className="admin-sidebar__nav">
+                        {navigationItems.map((item) => {
+                            const isActive = item.to === "/admin"
+                                ? location.pathname === item.to || location.pathname === "/admin/report"
+                                : location.pathname.startsWith(item.to);
+
+                            return (
+                                <li key={item.to}>
+                                    <Link
+                                        to={item.to}
+                                        onClick={onNavigate}
+                                        className={`admin-sidebar__link${isActive ? " admin-sidebar__link--active" : ""}`}
+                                        aria-current={isActive ? "page" : undefined}
+                                    >
+                                        <i className={`bi ${item.icon}`}></i>
+                                        <span>{item.label}</span>
+                                        {isActive && <span className="admin-sidebar__active-indicator"></span>}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </nav>
+
+                <div className="admin-sidebar__bottom">
+                    <div className="admin-sidebar__help-icon"><i className="bi bi-headset"></i></div>
+                    <strong>Cần hỗ trợ?</strong>
+                    <p>Liên hệ quản trị hệ thống nếu bạn cần trợ giúp.</p>
+                    <Link to="/" onClick={onNavigate}>
+                        Mở trang bán hàng <i className="bi bi-arrow-up-right"></i>
+                    </Link>
+                </div>
+            </aside>
         </>
     );
 };
