@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="54" y1="16" x2="1112" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101A2B"/>
+      <stop offset="1" stop-color="#07111F"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="762" y1="165" x2="1067" y2="425" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#183A55"/>
+      <stop offset="1" stop-color="#111E33"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="126" y1="191" x2="481" y2="485" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#72E6FF"/>
+      <stop offset="1" stop-color="#2AA9E8"/>
+    </linearGradient>
+    <filter id="glow" x="735" y="126" width="386" height="375" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v630H0z"/>
+  <circle cx="1003" cy="279" r="152" fill="#2AA9E8" fill-opacity=".12"/>
+  <circle cx="1003" cy="279" r="122" fill="#54D7FF" fill-opacity=".28" filter="url(#glow)"/>
+  <path d="M0 570c233-58 414-41 634 60H0z" fill="#17283D" fill-opacity=".65"/>
+  <g transform="translate(87 174)">
+    <rect width="82" height="82" rx="22" fill="#18283B"/>
+    <path d="M20 24h43v7L32 58h31v8H20v-7l31-27H20z" fill="url(#accent)"/>
+    <path d="M17 72h49" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <text x="104" y="57" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" letter-spacing="1">Zuhot Laptop</text>
+  </g>
+  <text x="90" y="350" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">Chọn laptop phù hợp</text>
+  <text x="90" y="415" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700">cho mọi nhu cầu</text>
+  <text x="93" y="475" fill="#B5C5D8" font-family="Arial, Helvetica, sans-serif" font-size="24">Khám phá sản phẩm và ưu đãi tại Zuhot Laptop</text>
+  <g transform="translate(735 158)">
+    <rect x="20" y="0" width="334" height="252" rx="18" fill="#83E7FF" fill-opacity=".13"/>
+    <rect x="33" y="14" width="308" height="224" rx="12" fill="#07111F" stroke="#82DFFF" stroke-opacity=".55" stroke-width="2"/>
+    <rect x="46" y="27" width="282" height="198" rx="6" fill="url(#screen)"/>
+    <circle cx="187" cy="20" r="2" fill="#8CEBFF"/>
+    <path d="M5 252h364l-31 45H37z" fill="#B8C6D5"/>
+    <path d="M5 252h364l-11 16H16z" fill="#E2EAF1"/>
+    <path d="M148 270h79l9 12h-97z" fill="#8294A7"/>
+    <path d="M74 193V74h76v14H90v34h52v14H90v42h64v15z" fill="#DDF8FF" fill-opacity=".95"/>
+    <path d="M168 194V74h17v106h55v14z" fill="#73DFFF"/>
+    <path d="M264 74h18v120h-18z" fill="#DDF8FF" fill-opacity=".8"/>
+    <circle cx="272" cy="61" r="8" fill="#65DEFF"/>
+  </g>
+  <path d="M92 532h136" stroke="#53D8FF" stroke-linecap="round" stroke-width="5"/>
+</svg>
