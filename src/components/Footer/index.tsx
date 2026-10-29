@@ -1,5 +1,4 @@
-import Button from "../Button";
-import Input from "../Input";
+// @ts-expect-error CSS side-effect import is handled by the bundler.
 import "./index.css";
 const Footer = () => {
     return (
