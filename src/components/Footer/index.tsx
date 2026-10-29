@@ -1,5 +1,4 @@
-// @ts-expect-error CSS side-effect import is handled by the bundler.
-import "./index.css";
+
 const Footer = () => {
     return (
         <footer className="bg-dark">
