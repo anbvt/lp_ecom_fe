@@ -1,0 +1,598 @@
+.content > .account-page {
+    width: 100%;
+}
+
+.account-page {
+    min-height: 65vh;
+    padding: 48px 24px 72px;
+    background: #f7f9fc;
+}
+
+.account-shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.account-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.account-eyebrow {
+    margin: 0 0 8px;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.account-heading h1 {
+    margin: 0;
+    color: #17243a;
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.account-heading__description {
+    margin: 8px 0 0;
+    color: #7b8799;
+    font-size: 14px;
+}
+
+.account-heading__link {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid #e3eaf4;
+    border-radius: 11px;
+    background: #fff;
+    color: #354052;
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: color 160ms ease, border-color 160ms ease;
+}
+
+.account-heading__link:hover {
+    border-color: #b7c9f8;
+    color: #2563eb;
+}
+
+.account-profile {
+    display: flex;
+    min-height: 150px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 32px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at 87% 14%, rgba(119, 164, 255, 0.21), transparent 25%),
+        linear-gradient(110deg, #101a2b 0%, #1b3763 100%);
+    color: #fff;
+    box-shadow: 0 14px 36px rgba(16, 26, 43, 0.12);
+}
+
+.account-profile__identity {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 18px;
+}
+
+.account-avatar {
+    display: grid;
+    width: 74px;
+    height: 74px;
+    flex: 0 0 74px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.13);
+    color: #d7e6ff;
+    font-size: 24px;
+    font-weight: 750;
+    letter-spacing: 1px;
+}
+
+.account-profile__details {
+    min-width: 0;
+}
+
+.account-profile__label {
+    color: #b9c9e2;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+}
+
+.account-profile__details h2 {
+    overflow: hidden;
+    margin: 6px 0 7px;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.account-profile__details p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #d0daea;
+    font-size: 13px;
+}
+
+.account-profile__summary {
+    display: flex;
+    min-width: 180px;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 17px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.account-profile__summary-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.13);
+    color: #c9dcff;
+    font-size: 19px;
+}
+
+.account-profile__summary strong,
+.account-profile__summary div > span {
+    display: block;
+}
+
+.account-profile__summary strong {
+    color: #fff;
+    font-size: 22px;
+    line-height: 1.1;
+}
+
+.account-profile__summary div > span {
+    margin-top: 5px;
+    color: #c5d2e6;
+    font-size: 11px;
+}
+
+.account-orders {
+    margin-top: 30px;
+    padding: 28px 30px 30px;
+    border: 1px solid #e8edf4;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(16, 26, 43, 0.035);
+}
+
+.account-orders__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.account-orders__heading h2 {
+    margin: 0;
+    color: #17243a;
+    font-size: 20px;
+    font-weight: 750;
+    letter-spacing: -0.4px;
+}
+
+.account-orders__heading p {
+    margin: 6px 0 0;
+    color: #7b8799;
+    font-size: 13px;
+}
+
+.account-orders__count {
+    flex: 0 0 auto;
+    padding: 7px 11px;
+    border-radius: 20px;
+    background: #f1f5fb;
+    color: #536176;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.account-tabs__list {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0 0 10px;
+    border: 0;
+    border-bottom: 1px solid #e9edf3;
+    list-style: none;
+    scrollbar-width: thin;
+}
+
+.account-tabs__list .react-tabs__tab {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 14px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #7b8799;
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+    bottom: auto;
+}
+
+.account-tabs__list .react-tabs__tab:hover {
+    background: #f7f9fc;
+    color: #354052;
+}
+
+.account-tabs__list .react-tabs__tab--selected {
+    background: #eef4ff;
+    color: #1d4ed8;
+}
+
+.account-tabs__list .react-tabs__tab:focus::after {
+    display: none;
+}
+
+.account-tabs__list .react-tabs__tab span {
+    display: inline-grid;
+    min-width: 21px;
+    height: 21px;
+    place-items: center;
+    padding: 0 5px;
+    border-radius: 11px;
+    background: rgba(37, 99, 235, 0.1);
+    font-size: 10px;
+}
+
+.account-tabs__panel {
+    padding-top: 18px;
+    outline: none;
+}
+
+.account-order-list {
+    display: grid;
+    gap: 12px;
+}
+
+.account-order {
+    overflow: hidden;
+    border: 1px solid #e7ecf3;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.account-order__header {
+    display: flex;
+    min-height: 68px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 14px 18px;
+}
+
+.account-order__meta {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+}
+
+.account-order__id {
+    color: #17243a;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.account-order__date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #7b8799;
+    font-size: 12px;
+}
+
+.account-order__toggle {
+    display: inline-flex;
+    min-height: 36px;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 0 11px;
+    border: 1px solid #e3eaf4;
+    border-radius: 9px;
+    background: #fff;
+    color: #354052;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.account-order__toggle:hover {
+    border-color: #b7c9f8;
+    color: #2563eb;
+}
+
+.account-order__products {
+    display: grid;
+    gap: 12px;
+    padding: 16px 18px;
+    border-top: 1px solid #edf0f5;
+    background: #fbfcfe;
+}
+
+.account-order-product {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 14px;
+}
+
+.account-order-product__image {
+    display: grid;
+    width: 58px;
+    height: 52px;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid #e9edf3;
+    border-radius: 10px;
+    background: #fff;
+    color: #8ca0bd;
+    font-size: 23px;
+}
+
+.account-order-product__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.account-order-product__info {
+    display: grid;
+    min-width: 0;
+    gap: 5px;
+}
+
+.account-order-product__info strong {
+    overflow: hidden;
+    color: #243148;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.account-order-product__info span {
+    color: #7b8799;
+    font-size: 11px;
+}
+
+.account-order-product__quantity {
+    color: #69768a;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.account-order-product__price {
+    color: #17243a;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.account-order__empty {
+    margin: 0;
+    color: #7b8799;
+    font-size: 13px;
+}
+
+.account-order__footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 18px;
+    border-top: 1px solid #edf0f5;
+    background: #fbfcfe;
+}
+
+.account-order__footer span {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 7px;
+    color: #7b8799;
+    font-size: 11px;
+}
+
+.account-order__footer strong {
+    color: #354052;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.account-state {
+    display: flex;
+    min-height: 230px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    padding: 24px;
+    border: 1px dashed #e1e7f0;
+    border-radius: 14px;
+    background: #fbfcfe;
+    text-align: center;
+}
+
+.account-state__icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border-radius: 15px;
+    background: #eef4ff;
+    color: #2563eb;
+    font-size: 21px;
+}
+
+.account-state p {
+    margin: 0;
+    color: #6f7c90;
+    font-size: 13px;
+}
+
+.account-state a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 2px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.account-state--error .account-state__icon {
+    background: #fff0ef;
+    color: #b42318;
+}
+
+@media (max-width: 767.98px) {
+    .account-page {
+        padding: 28px 16px 52px;
+    }
+
+    .account-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .account-profile {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+        padding: 22px;
+        border-radius: 17px;
+    }
+
+    .account-avatar {
+        width: 60px;
+        height: 60px;
+        flex-basis: 60px;
+        border-radius: 18px;
+        font-size: 20px;
+    }
+
+    .account-profile__summary {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .account-orders {
+        margin-top: 20px;
+        padding: 21px 17px;
+        border-radius: 17px;
+    }
+
+    .account-orders__heading {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .account-heading__link {
+        min-height: 40px;
+    }
+
+    .account-orders__heading {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .account-tabs__list .react-tabs__tab {
+        padding: 10px 11px;
+        font-size: 12px;
+    }
+
+    .account-order__header {
+        align-items: flex-start;
+        gap: 10px;
+        padding: 13px;
+    }
+
+    .account-order__meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .account-order__toggle {
+        min-height: 33px;
+        padding: 0 9px;
+        font-size: 11px;
+    }
+
+    .account-order__products {
+        padding: 13px;
+    }
+
+    .account-order-product {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .account-order-product__image {
+        width: 46px;
+        height: 44px;
+        grid-row: span 2;
+    }
+
+    .account-order-product__quantity {
+        grid-column: 2;
+    }
+
+    .account-order-product__price {
+        grid-column: 2;
+    }
+
+    .account-order__footer {
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 13px;
+    }
+
+    .account-order__footer strong {
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .account-heading__link {
+        transition: none;
+    }
+}

@@ -1,112 +1,190 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 import UserLayout from "src/components/Layout/UserLayout";
 import { useFetch } from "src/util/CustomHook";
 import OrderItem from "./OrderItem";
-import { useNavigate } from "react-router-dom";
+import "./index.css";
+
+interface AccountOrder {
+    id: number;
+    status?: number;
+    [key: string]: any;
+}
 
 const MyAccount = () => {
     const navigate = useNavigate();
-    const [cookie] = useCookies(['user']);
-    const [data, setData] = useState<any>();
-    const [user, setUser] = useState<any>();
-    const [dataStatus0, setDataStatus0] = useState<any>();
-    const [dataStatus1, setDataStatus1] = useState<any>();
-    const init = async () => {
-        const { data: result } = await useFetch.get("/api/order", { params: { userId: cookie.user.id } });
-        setData(result);
-    }
-
-    const dataStatusDxl = async () => {
-        const { data: result2 } = await useFetch.get("/api/order/fillOrdersByStatus", { params: { userId: cookie.user.id, status: 0 } });
-        setDataStatus0(result2);
-    }
-
-    const dataStatusDg = async () => {
-        const { data: result } = await useFetch.get("/api/order/fillOrdersByStatus", { params: { userId: cookie.user.id, status: 1 } });
-        setDataStatus1(result);
-    }
+    const [cookie] = useCookies(["user"]);
+    const [orders, setOrders] = useState<AccountOrder[]>([]);
+    const [pendingOrders, setPendingOrders] = useState<AccountOrder[]>([]);
+    const [shippingOrders, setShippingOrders] = useState<AccountOrder[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        if (cookie.user == null || cookie.user === undefined) {
+        const userId = cookie.user?.id;
+        if (userId == null) {
             navigate("/login");
             return;
-        } else {
-            setUser(cookie.user);
         }
-        init();
-        dataStatusDxl();
-        dataStatusDg();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+
+        let active = true;
+        const loadAccountOrders = async () => {
+            setIsLoading(true);
+            setError("");
+
+            try {
+                const [allResult, pendingResult, shippingResult] = await Promise.all([
+                    useFetch.get<AccountOrder[]>("/api/order", { params: { userId } }),
+                    useFetch.get<AccountOrder[]>("/api/order/fillOrdersByStatus", {
+                        params: { userId, status: 0 },
+                    }),
+                    useFetch.get<AccountOrder[]>("/api/order/fillOrdersByStatus", {
+                        params: { userId, status: 1 },
+                    }),
+                ]);
+
+                if (active) {
+                    setOrders(allResult.data ?? []);
+                    setPendingOrders(pendingResult.data ?? []);
+                    setShippingOrders(shippingResult.data ?? []);
+                }
+            } catch (requestError) {
+                console.error("Failed to load account orders:", requestError);
+                if (active) {
+                    setError("Không thể tải đơn hàng. Vui lòng thử lại sau.");
+                }
+            } finally {
+                if (active) {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        loadAccountOrders();
+        return () => {
+            active = false;
+        };
+    }, [cookie.user, navigate]);
+
+    const initials = cookie.user?.fullname
+        ?.trim()
+        .split(/\s+/)
+        .slice(-2)
+        .map((part: string) => part.charAt(0))
+        .join("")
+        .toUpperCase() || "ZH";
+
+    const renderOrders = (items: AccountOrder[], emptyMessage: string) => {
+        if (isLoading) {
+            return (
+                <div className="account-state" role="status">
+                    <span className="account-state__icon"><i className="bi bi-arrow-repeat"></i></span>
+                    <p>Đang tải đơn hàng...</p>
+                </div>
+            );
+        }
+
+        if (error) {
+            return (
+                <div className="account-state account-state--error" role="alert">
+                    <span className="account-state__icon"><i className="bi bi-exclamation-circle"></i></span>
+                    <p>{error}</p>
+                </div>
+            );
+        }
+
+        if (items.length === 0) {
+            return (
+                <div className="account-state">
+                    <span className="account-state__icon"><i className="bi bi-box-seam"></i></span>
+                    <p>{emptyMessage}</p>
+                    <Link to="/search">Khám phá sản phẩm <i className="bi bi-arrow-right"></i></Link>
+                </div>
+            );
+        }
+
+        return (
+            <div className="account-order-list">
+                {items.map((order) => <OrderItem key={order.id} object={order} />)}
+            </div>
+        );
+    };
 
     return (
         <UserLayout>
-            <section className="h-100 gradient-custom-2">
-                <div className="container py-5 h-100">
-                    <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col col-lg-9 col-xl-7">
-                            <div className="card">
-                                <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: 200 }}>
-                                    <div className="ms-4 mt-5 d-flex flex-column" style={{ width: 150 }}>
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: 150, zIndex: 1 }} />
-                                        <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
-                                            Chỉnh sửa thông tin
-                                        </button>
-                                    </div>
-                                    <div className="ms-3" style={{ marginTop: 130 }}>
-                                        <h5>{user?.fullname}</h5>
-                                        <p>{user?.phone}</p>
-                                    </div>
-                                </div>
-                                <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
-                                    <div className="d-flex justify-content-end text-center py-1">
-                                        <div>
-                                            <p className="mb-1 h5">{data?.length || 0}</p>
-                                            <p className="small text-muted mb-0">Số đơn hàng đã mua</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="card-body p-4 text-black">
-                                    <div className="mb-5">
-                                        <p className="lead fw-normal mb-1">Đơn hàng</p>
-                                        {/* <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                                            <p className="font-italic mb-1">Web Developer</p>
-                                            <p className="font-italic mb-1">Lives in New York</p>
-                                            <p className="font-italic mb-0">Photographer</p>
-                                        </div> */}
-                                        <Tabs className={"py-4"}>
-                                            <TabList>
-                                                <Tab>Đang xử lí ({dataStatus0?.length})</Tab>
-                                                <Tab>Đang giao ({dataStatus1?.length})</Tab>
-                                                <Tab>Đã giao</Tab>
-                                            </TabList>
+            <main className="account-page">
+                <div className="account-shell">
+                    <div className="account-heading">
+                        <div>
+                            <p className="account-eyebrow">TÀI KHOẢN CỦA BẠN</p>
+                            <h1>Xin chào, {cookie.user?.fullname || "bạn"}!</h1>
+                            <p className="account-heading__description">
+                                Theo dõi thông tin và tình trạng các đơn hàng của bạn.
+                            </p>
+                        </div>
+                        <Link className="account-heading__link" to="/">
+                            <i className="bi bi-arrow-left"></i> Tiếp tục mua sắm
+                        </Link>
+                    </div>
 
-                                            <TabPanel >
-                                                {dataStatus0?.length === 0 ? <><div className="justify-content-center d-flex mt-4 text-primary">Không có đơn hàng nào đang xử lý</div></> :
-                                                    dataStatus0?.map((s: any) => <OrderItem key={s.id} object={s} />)
-
-                                                }
-                                            </TabPanel>
-                                            <TabPanel >
-                                                {dataStatus1?.length === 0 ? <><div className="justify-content-center d-flex mt-4">Không có đơn hàng nào đang giao</div></> :
-                                                    dataStatus1?.map((s: any) => <OrderItem key={s.id} object={s} />)
-                                                }
-                                            </TabPanel>
-                                            <TabPanel>
-                                                <h2>Any content 2</h2>
-                                            </TabPanel>
-                                        </Tabs>
-                                    </div>
-                                </div>
+                    <section className="account-profile" aria-label="Thông tin tài khoản">
+                        <div className="account-profile__identity">
+                            <div className="account-avatar" aria-hidden="true">{initials}</div>
+                            <div className="account-profile__details">
+                                <span className="account-profile__label">TÀI KHOẢN KHÁCH HÀNG</span>
+                                <h2>{cookie.user?.fullname || "Khách hàng"}</h2>
+                                <p><i className="bi bi-telephone"></i> {cookie.user?.phone || "Chưa cập nhật số điện thoại"}</p>
                             </div>
                         </div>
-                    </div>
+                        <div className="account-profile__summary">
+                            <span className="account-profile__summary-icon"><i className="bi bi-receipt"></i></span>
+                            <div>
+                                <strong>{isLoading ? "—" : orders.length}</strong>
+                                <span>Tổng đơn hàng</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="account-orders" aria-labelledby="account-orders-title">
+                        <div className="account-orders__heading">
+                            <div>
+                                <h2 id="account-orders-title">Đơn hàng của tôi</h2>
+                                <p>Theo dõi tiến trình giao hàng và xem lại đơn hàng.</p>
+                            </div>
+                            <span className="account-orders__count">
+                                {isLoading ? "Đang cập nhật" : `${orders.length} đơn hàng`}
+                            </span>
+                        </div>
+
+                        <Tabs className="account-tabs">
+                            <TabList className="account-tabs__list">
+                                <Tab>Đang xử lý <span>{pendingOrders.length}</span></Tab>
+                                <Tab>Đang giao <span>{shippingOrders.length}</span></Tab>
+                                <Tab>Đã giao</Tab>
+                            </TabList>
+
+                            <TabPanel className="account-tabs__panel">
+                                {renderOrders(pendingOrders, "Bạn chưa có đơn hàng đang xử lý.")}
+                            </TabPanel>
+                            <TabPanel className="account-tabs__panel">
+                                {renderOrders(shippingOrders, "Bạn chưa có đơn hàng đang giao.")}
+                            </TabPanel>
+                            <TabPanel className="account-tabs__panel">
+                                <div className="account-state">
+                                    <span className="account-state__icon"><i className="bi bi-box-seam"></i></span>
+                                    <p>Đơn hàng đã giao sẽ được hiển thị tại đây.</p>
+                                    <Link to="/search">Khám phá sản phẩm <i className="bi bi-arrow-right"></i></Link>
+                                </div>
+                            </TabPanel>
+                        </Tabs>
+                    </section>
                 </div>
-            </section>
+            </main>
         </UserLayout>
     );
-}
+};
+
 export default MyAccount;

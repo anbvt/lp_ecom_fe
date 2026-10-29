@@ -1,78 +1,56 @@
-const Carousel = () => {
-  const slides = [
-    {
-      image:
-        "https://raw.githubusercontent.com/anbvt/Laptop_eCommerce_FE/refs/heads/master/public/img/Background.png",
-      title: "Gaming Laptop RTX Series",
-      desc: "Hiệu năng mạnh mẽ – Chiến mọi tựa game",
-    },
-    {
-      image:
-        "https://raw.githubusercontent.com/anbvt/Laptop_eCommerce_FE/refs/heads/master/public/img/Background.png",
-      title: "Laptop Văn Phòng",
-      desc: "Mỏng nhẹ – Pin lâu – Hiệu suất ổn định",
-    },
-    {
-      image:
-        "https://raw.githubusercontent.com/anbvt/Laptop_eCommerce_FE/refs/heads/master/public/img/Background.png",
-      title: "Laptop Cao Cấp",
-      desc: "Thiết kế sang trọng – Công nghệ mới nhất",
-    },
-  ];
+import { Link } from "react-router-dom";
+import "./index.css";
 
-  return (
-    <div
-      id="laptopCarousel"
-      className="carousel slide carousel-fade"
-      data-bs-ride="carousel"
-    >
-      <div className="carousel-inner">
-        {slides.map((item, index) => (
-          <div
-            key={index}
-            className={`carousel-item ${index === 0 ? "active" : ""}`}
-          >
-            <img
-              src={item.image}
-              className="d-block w-100"
-              alt={item.title}
-              style={{ maxHeight: "480px", objectFit: "cover" }}
-            />
-
-            {/* Caption */}
-            <div className="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
-              <h2 className="fw-bold">{item.title}</h2>
-              <p>{item.desc}</p>
-              <button className="btn btn-warning fw-bold">
-                Shop now
-              </button>
-            </div>
-          </div>
-        ))}
+const Carousel = () => (
+  <section className="home-hero" aria-labelledby="home-hero-title">
+    <div className="home-hero__copy">
+      <p className="home-hero__eyebrow">
+        <span className="home-hero__eyebrow-dot"></span>
+        Laptop cho mọi mục tiêu
+      </p>
+      <h1 id="home-hero-title">
+        Công nghệ tốt.
+        <br />
+        <span>Hành trình tốt hơn.</span>
+      </h1>
+      <p className="home-hero__description">
+        Khám phá những chiếc laptop phù hợp với công việc, học tập và giải trí
+        của bạn.
+      </p>
+      <div className="home-hero__actions">
+        <Link className="home-hero__primary" to="/search">
+          Khám phá sản phẩm <i className="bi bi-arrow-up-right"></i>
+        </Link>
+        <a className="home-hero__secondary" href="#featured-products">
+          Xem ưu đãi <i className="bi bi-arrow-down"></i>
+        </a>
       </div>
-
-      {/* Controls */}
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#laptopCarousel"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" />
-        <span className="visually-hidden">Previous</span>
-      </button>
-
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#laptopCarousel"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" />
-        <span className="visually-hidden">Next</span>
-      </button>
+      <div className="home-hero__trust">
+        <span><i className="bi bi-patch-check"></i> Sản phẩm chính hãng</span>
+        <span><i className="bi bi-headset"></i> Tư vấn tận tâm</span>
+      </div>
     </div>
-  );
-};
+
+    <div className="home-hero__visual" aria-hidden="true">
+      <div className="home-hero__orbit home-hero__orbit--outer"></div>
+      <div className="home-hero__orbit home-hero__orbit--inner"></div>
+      <div className="home-hero__device">
+        <div className="home-hero__device-screen">
+          <div className="home-hero__screen-top">
+            <span></span><span></span><span></span>
+          </div>
+          <i className="bi bi-laptop"></i>
+          <span className="home-hero__screen-caption">YOUR NEXT LAPTOP</span>
+        </div>
+        <div className="home-hero__device-base"></div>
+      </div>
+      <div className="home-hero__floating-card">
+        <span className="home-hero__floating-icon"><i className="bi bi-stars"></i></span>
+        <span><strong>Chọn đúng thiết bị</strong><small>Cho riêng nhu cầu của bạn</small></span>
+      </div>
+      <span className="home-hero__visual-label">TECH THAT MOVES YOU</span>
+    </div>
+  </section>
+);
 
 export default Carousel;

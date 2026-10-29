@@ -3,8 +3,7 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from 'react-router-dom';
 import "./index.css";
 const Navbar = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [cookie, setCookie, removeCookie] = useCookies(['user', 'admin']);
+    const [cookie, , removeCookie] = useCookies(['user', 'admin']);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -25,55 +24,55 @@ const Navbar = () => {
     }
     return (
         <div className="navAll">
-            {/* ===== MAIN NAV ===== */}
-            <nav className="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+            <div className="site-announcement">
+                <strong>ZUHOT LAPTOP</strong> <span className="mx-1">·</span> Chọn thiết bị phù hợp cho mọi hành trình
+            </div>
+            <nav className="navbar navbar-expand-lg sticky-top site-navbar">
                 <div className="container">
-
-                    {/* Logo */}
-                    <Link className="navbar-brand fw-bold fs-4" to="/">
-                        <i className="fa-solid fa-shop me-2"></i> Zu Hot
+                    <Link className="navbar-brand site-brand" to="/" aria-label="ZUHOT Laptop - Trang chủ">
+                        <span className="site-brand__mark"><i className="bi bi-laptop"></i></span>
+                        <span>ZUHOT<span className="site-brand__suffix"> LAPTOP</span></span>
                     </Link>
 
-                    <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNav"
+                        aria-controls="mainNav"
+                        aria-expanded="false"
+                        aria-label="Mở menu điều hướng"
+                    >
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
                     <div className="collapse navbar-collapse" id="mainNav">
-
-                        {/* Search */}
-                        <div className="mx-auto my-3 my-lg-0" style={{ maxWidth: "500px", width: "100%" }}>
-                            <div className="input-group">
-                                <input type="text" className="form-control" placeholder="Search products..." />
-                                <button className="btn btn-dark">
-                                    <i className="bi bi-search"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Right menu */}
-                        <ul className="navbar-nav ms-auto align-items-lg-center">
-
+                        <Link className="header-search-link mx-lg-auto" to="/search">
+                            <i className="bi bi-search"></i>
+                            <span>Khám phá laptop theo nhu cầu</span>
+                        </Link>
+                        <ul className="navbar-nav ms-lg-auto align-items-lg-center">
                             <li className="nav-item">
-                                <Link className="nav-link fw-bold" to="/search">
-                                    Products
+                                <Link className="nav-link" to="/search">
+                                    Sản phẩm
                                 </Link>
                             </li>
-
                             <li className="nav-item">
-                                <Link onClick={checkLogin} className="nav-link fw-bold" to="/cart">
-                                    <i className="bi bi-cart3 me-1"></i> Giỏ hàng
+                                <Link onClick={checkLogin} className="nav-link" to="/cart">
+                                    <i className="bi bi-bag"></i> Giỏ hàng
                                 </Link>
                             </li>
-
-                            {/* User dropdown */}
                             <li className="nav-item dropdown">
-                                <button className="nav-link dropdown-toggle fw-bold" data-bs-toggle="dropdown">
-                                    <i className="bi bi-person-circle me-1"></i>
+                                <button
+                                    type="button"
+                                    className="nav-link dropdown-toggle"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <i className="bi bi-person"></i>
                                     {cookie.user?.fullname || "Tài khoản"}
                                 </button>
-
                                 <ul className="dropdown-menu dropdown-menu-end">
-
                                     {!cookie.user && (
                                         <li>
                                             <Link className="dropdown-item" to="/login">
@@ -108,16 +107,12 @@ const Navbar = () => {
                                             </li>
                                         </>
                                     )}
-
                                 </ul>
                             </li>
-
                         </ul>
-
                     </div>
                 </div>
             </nav>
-
         </div>
     );
 }

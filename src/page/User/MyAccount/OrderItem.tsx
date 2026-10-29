@@ -1,72 +1,87 @@
 import { useState } from "react";
-import { FaHeart, FaTrash } from "react-icons/fa";
 import { formatter } from "src/util/formatCurrency";
 
-const ProductItem = ({ object, quantity }: any) => {
-    return (
-        <>
-            <div className="card-body row" >
-                <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                    {/* Image */}
-                    <div className="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                        <img src={object.logo} alt="" className="w-100" />
-                        <a href="#!">
-                            <div className="mask" style={{ backgroundColor: 'rgba(251, 251, 251, 0.2)' }} />
-                        </a>
-                    </div>
-                    {/* Image */}
-                </div>
-                <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                    {/* Data */}
-                    <p><strong>{object.name}</strong></p>
-                    <p>Màu sắc: {object.color.name}</p>
-                    <button type="button" className="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip" title="Remove item">
-                        <FaTrash />
-                    </button>
-                    <button type="button" className="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip" title="Move to the wish list">
-                        <FaHeart />
-                    </button>
-                    {/* Data */}
-                </div>
-                <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    {/* Quantity */}
-                    <div className="d-flex mb-4" style={{ maxWidth: 300 }}>
-                        <div className="form-outline">
-                            <label className="form-label" htmlFor="form1">Số lượng: {quantity}</label>
-                        </div>
-                    </div>
-                    {/* Quantity */}
-                    {/* Price */}
-                    <p className="text-start text-md-center">
-                        <strong>{formatter.format(object.price * quantity)}</strong>
-                    </p>
-                    {/* Price */}
-                </div>
-            </div>
-            <hr className="my-4 mx-4" />
-        </>
-    )
-}
+const formatOrderDate = (value: string) => {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+        return value || "Chưa có thông tin";
+    }
 
+    return new Intl.DateTimeFormat("vi-VN", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+    }).format(date);
+};
+
+const ProductItem = ({ object, quantity }: any) => (
+    <div className="account-order-product">
+        <div className="account-order-product__image">
+            {object.logo
+                ? <img src={object.logo} alt={object.name || "Sản phẩm"} />
+                : <i className="bi bi-laptop" aria-hidden="true"></i>}
+        </div>
+        <div className="account-order-product__info">
+            <strong>{object.name || "Sản phẩm"}</strong>
+            <span>
+                {[
+                    object.color?.name,
+                    object.ram && `RAM ${object.ram}`,
+                    object.rom && `Ổ cứng ${object.rom}`,
+                ].filter(Boolean).join(" · ") || "Thông tin sản phẩm"}
+            </span>
+        </div>
+        <div className="account-order-product__quantity">SL: {quantity}</div>
+        <strong className="account-order-product__price">
+            {formatter.format((object.price || 0) * quantity)}
+        </strong>
+    </div>
+);
 
 const OrderItem = ({ object }: any) => {
     const [show, setShow] = useState(false);
+    const details = object.order_details ?? [];
+
     return (
-        <>
-            <div className="card mb-3" >
-                <div className="card-header d-flex justify-content-between align-items-center">
-                    <section>ID: {object.id} - Ngày Mua: {object.buyDate}</section>
-                    <button onClick={() => setShow(!show)} className="btn btn-default">Xem chi tiết</button>
+        <article className="account-order">
+            <div className="account-order__header">
+                <div className="account-order__meta">
+                    <span className="account-order__id">Đơn hàng #{object.id}</span>
+                    <span className="account-order__date">
+                        <i className="bi bi-calendar3"></i> {formatOrderDate(object.buyDate)}
+                    </span>
                 </div>
-                {
-                    show && object.order_details.map((s: any) => <ProductItem key={s.orderid} object={s.product} quantity={s.quantity} />)
-                }
-                <div className="card-footer">
-                    Địa chỉ: {object.place}
-                </div>
+                <button
+                    type="button"
+                    className="account-order__toggle"
+                    onClick={() => setShow((current) => !current)}
+                    aria-expanded={show}
+                >
+                    {show ? "Thu gọn" : "Chi tiết"}
+                    <i className={`bi ${show ? "bi-chevron-up" : "bi-chevron-down"}`}></i>
+                </button>
             </div>
 
-        </>
+            {show && (
+                <div className="account-order__products">
+                    {details.length > 0
+                        ? details.map((item: any, index: number) => (
+                            <ProductItem
+                                key={item.id ?? item.orderid ?? `${object.id}-${index}`}
+                                object={item.product ?? {}}
+                                quantity={item.quantity ?? 0}
+                            />
+                        ))
+                        : <p className="account-order__empty">Đơn hàng chưa có thông tin sản phẩm.</p>}
+                </div>
+            )}
+
+            <div className="account-order__footer">
+                <span><i className="bi bi-geo-alt"></i> Địa chỉ nhận hàng</span>
+                <strong>{object.place || "Chưa cập nhật địa chỉ"}</strong>
+            </div>
+        </article>
     );
-}
+};
+
 export default OrderItem;
