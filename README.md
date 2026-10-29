@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# Laptop E-Commerce Website — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A laptop e-commerce web application built with React and TypeScript. This project focuses on frontend development, user interface design, application state management, and integration with a separate backend API.
 
-## Available Scripts
+**Live Demo:** [zuhot-laptop.vercel.app](https://zuhot-laptop.vercel.app)
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+- **Core:** React 18, TypeScript
+- **Routing:** React Router DOM
+- **State Management:** Redux, React Redux
+- **API Requests:** Axios
+- **Forms:** React Hook Form
+- **UI Libraries:** Ant Design, Bootstrap, React Bootstrap
+- **Build Tools:** Create React App, npm
+- **Deployment:** Vercel
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Key Areas
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Developing reusable React components and application pages
+- Implementing client-side navigation
+- Managing shared application state
+- Handling form inputs and user interactions
+- Integrating the frontend with backend APIs using Axios
+- Building user interfaces with component libraries
 
-### `npm test`
+## Project Architecture
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The application is structured as a frontend client that works with a separate backend service.
 
-### `npm run build`
+- **Frontend:** React and TypeScript
+- **Backend:** [lp_ecom_be](https://github.com/anbvt/lp_ecom_be)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Prerequisites:** Node.js 24 or later and npm.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/anbvt/lp_ecom_fe.git
+cd lp_ecom_fe
+npm install
+npm start
+```
 
-### `npm run eject`
+Open `http://localhost:3000` in your browser.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To create a production build:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Related Repository
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [Frontend — lp_ecom_fe](https://github.com/anbvt/lp_ecom_fe)
+- [Backend — lp_ecom_be](https://github.com/anbvt/lp_ecom_be)
 
-## Learn More
+## Author
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Thiên Ân (An Bùi)**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [GitHub](https://github.com/anbvt)
+- [Portfolio](https://buivuthienan.id.vn)
+- [LinkedIn](https://www.linkedin.com/in/anbvt/)
