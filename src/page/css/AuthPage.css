@@ -266,6 +266,15 @@
     gap: 18px;
 }
 
+.auth-form--registration {
+    gap: 14px;
+}
+
+.auth-registration__prompt {
+    color: #647187;
+    font-size: 12px;
+}
+
 .auth-field {
     min-width: 0;
 }

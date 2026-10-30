@@ -21,13 +21,31 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         setIsMenuOpen(false);
     }, [location.pathname]);
 
+    useEffect(() => {
+        if (!isMenuOpen) {
+            return;
+        }
+
+        const closeOnEscape = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setIsMenuOpen(false);
+            }
+        };
+
+        window.addEventListener("keydown", closeOnEscape);
+        return () => window.removeEventListener("keydown", closeOnEscape);
+    }, [isMenuOpen]);
+
     if (!cookie.admin) {
         return null;
     }
 
     return (
         <div className="admin-app">
-            <Navbar onMenuToggle={() => setIsMenuOpen((open) => !open)} />
+            <Navbar
+                isMenuOpen={isMenuOpen}
+                onMenuToggle={() => setIsMenuOpen((open) => !open)}
+            />
             <div className="admin-workspace">
                 <SideMenu isOpen={isMenuOpen} onNavigate={() => setIsMenuOpen(false)} />
                 <main className="admin-main">{children}</main>

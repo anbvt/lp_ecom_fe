@@ -129,11 +129,14 @@
         overflow-y: auto;
         box-shadow: 16px 0 35px rgba(20, 29, 48, 0.12);
         transform: translateX(-105%);
-        transition: transform 180ms ease;
+        visibility: hidden;
+        transition: transform 180ms ease, visibility 0s linear 180ms;
     }
 
     .admin-sidebar--open {
         transform: translateX(0);
+        visibility: visible;
+        transition: transform 180ms ease;
     }
 
     .admin-sidebar__bottom {

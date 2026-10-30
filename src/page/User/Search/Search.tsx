@@ -74,7 +74,7 @@ const Search = () => {
         console.error("Failed to load products:", err);
 
         if (active) {
-          setError("Unable to load products. Please try again.");
+          setError("Không thể tải sản phẩm. Vui lòng thử lại.");
         }
       } finally {
         if (active) {
@@ -110,7 +110,7 @@ const Search = () => {
       setFilter(response.data);
     } catch (err) {
       console.error("Failed to filter products:", err);
-      setError("Unable to filter products. Please try again.");
+      setError("Không thể lọc sản phẩm. Vui lòng thử lại.");
       setFilter(null);
     } finally {
       setFilterLoading(false);
@@ -132,7 +132,7 @@ const Search = () => {
 
   return (
     <UserLayout>
-      <div className="bg-light min-vh-100 py-4 py-lg-5">
+      <main className="bg-light min-vh-100 py-4 py-lg-5">
         <div className="container">
           {/* Page heading */}
           <div className="mb-4">
@@ -140,10 +140,10 @@ const Search = () => {
               ZUHOT LAPTOP
             </p>
 
-            <h2 className="fw-bold mb-2">Find Your Laptop</h2>
+            <h1 className="h2 fw-bold mb-2">Tìm laptop phù hợp</h1>
 
             <p className="text-secondary mb-0">
-              Explore our collection and find the right laptop for your needs.
+              Khám phá bộ sưu tập và chọn thiết bị phù hợp với nhu cầu của bạn.
             </p>
           </div>
 
@@ -151,7 +151,7 @@ const Search = () => {
             {/* Filter sidebar */}
 
             {/* FILTER SIDEBAR */}
-            <aside className="col-lg-3">
+            <aside className="col-lg-3" aria-label="Lọc sản phẩm">
               <div className="laptop-filter">
                 <div className="laptop-filter__header">
                   <div className="d-flex align-items-center gap-3">
@@ -160,9 +160,9 @@ const Search = () => {
                     </div>
 
                     <div>
-                      <h5 className="laptop-filter__title">Filter Products</h5>
+                      <h2 className="laptop-filter__title">Lọc sản phẩm</h2>
                       <p className="laptop-filter__subtitle mb-0">
-                        Find your perfect laptop
+                        Chọn cấu hình phù hợp với bạn
                       </p>
                     </div>
                   </div>
@@ -172,7 +172,7 @@ const Search = () => {
                     className="laptop-filter__clear"
                     onClick={handleReset}
                   >
-                    Clear all
+                    Xóa bộ lọc
                   </button>
                 </div>
 
@@ -185,7 +185,7 @@ const Search = () => {
                   <div className="laptop-filter__group">
                     <label className="laptop-filter__label" htmlFor="brand">
                       <i className="bi bi-tag me-2"></i>
-                      Brand
+                      Thương hiệu
                     </label>
 
                     <SelectInput
@@ -204,7 +204,7 @@ const Search = () => {
                   <div className="laptop-filter__group">
                     <label className="laptop-filter__label" htmlFor="ram">
                       <i className="bi bi-memory me-2"></i>
-                      Memory (RAM)
+                      Bộ nhớ RAM
                     </label>
 
                     <SelectInput
@@ -223,7 +223,7 @@ const Search = () => {
                   <div className="laptop-filter__group">
                     <label className="laptop-filter__label" htmlFor="rom">
                       <i className="bi bi-device-hdd me-2"></i>
-                      Storage
+                      Ổ cứng
                     </label>
 
                     <SelectInput
@@ -242,7 +242,7 @@ const Search = () => {
                   <div className="laptop-filter__group">
                     <label className="laptop-filter__label" htmlFor="display">
                       <i className="bi bi-display me-2"></i>
-                      Display size
+                      Kích thước màn hình
                     </label>
 
                     <SelectInput
@@ -261,7 +261,7 @@ const Search = () => {
                   <div className="laptop-filter__group">
                     <label className="laptop-filter__label" htmlFor="os">
                       <i className="bi bi-window me-2"></i>
-                      Operating system
+                      Hệ điều hành
                     </label>
 
                     <SelectInput
@@ -285,36 +285,36 @@ const Search = () => {
                     {filterLoading ? (
                       <>
                         <span className="spinner-border spinner-border-sm me-2"></span>
-                        Searching...
+                        Đang lọc...
                       </>
                     ) : (
                       <>
                         <i className="bi bi-search me-2"></i>
-                        Apply Filters
+                        Lọc sản phẩm
                       </>
                     )}
                   </button>
 
                   <p className="laptop-filter__hint">
                     <i className="bi bi-info-circle me-1"></i>
-                    Select your preferences to narrow down the results.
+                    Chọn cấu hình để thu hẹp kết quả tìm kiếm.
                   </p>
                 </form>
               </div>
             </aside>
 
             {/* Product section */}
-            <section className="col-lg-9">
+            <section className="col-lg-9" aria-labelledby="search-results-title">
               <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
                 <div>
-                  <h4 className="fw-bold mb-1">
-                    {isFiltering ? "Search Results" : "Our Laptops"}
-                  </h4>
+                  <h2 className="fw-bold mb-1" id="search-results-title">
+                    {isFiltering ? "Kết quả tìm kiếm" : "Danh sách laptop"}
+                  </h2>
 
                   <p className="text-secondary small mb-0">
                     {isFiltering
-                      ? `${displayedProducts.length} product(s) found`
-                      : `${products?.totalElements ?? displayedProducts.length} product(s) available`}
+                      ? `Tìm thấy ${displayedProducts.length} sản phẩm`
+                      : `${products?.totalElements ?? displayedProducts.length} sản phẩm`}
                   </p>
                 </div>
 
@@ -325,7 +325,7 @@ const Search = () => {
                     onClick={handleReset}
                   >
                     <i className="bi bi-arrow-counterclockwise me-1"></i>
-                    Show all products
+                    Xem tất cả sản phẩm
                   </button>
                 )}
               </div>
@@ -338,15 +338,17 @@ const Search = () => {
 
               {loading && !products ? (
                 <div
-                  className="d-flex flex-column align-items-center justify-content-center py-5"
-                  style={{ minHeight: "300px" }}
+                  className="laptop-search__loading d-flex flex-column align-items-center justify-content-center py-5"
+                  role="status"
+                  aria-busy="true"
                 >
-                  <SyncLoader color="#6351ce" />
-                  <p className="text-secondary mt-3 mb-0">Loading laptops...</p>
+                  <SyncLoader color="#2563eb" />
+                  <p className="text-secondary mt-3 mb-0">Đang tải sản phẩm...</p>
                 </div>
               ) : filterLoading ? (
-                <div className="d-flex justify-content-center py-5">
-                  <SyncLoader color="#6351ce" />
+                <div className="d-flex justify-content-center py-5" role="status" aria-busy="true">
+                  <SyncLoader color="#2563eb" />
+                  <span className="visually-hidden">Đang áp dụng bộ lọc...</span>
                 </div>
               ) : displayedProducts.length > 0 ? (
                 <>
@@ -365,14 +367,14 @@ const Search = () => {
                   {!isFiltering && products && products.totalPages > 1 && (
                     <nav
                       className="d-flex justify-content-center align-items-center gap-2 mt-5"
-                      aria-label="Product pagination"
+                      aria-label="Phân trang sản phẩm"
                     >
                       <button
                         type="button"
                         onClick={() => setPage(0)}
                         disabled={page === 0 || loading}
                         className="btn btn-white border shadow-sm"
-                        aria-label="First page"
+                        aria-label="Trang đầu"
                       >
                         <AiFillFastBackward />
                       </button>
@@ -384,13 +386,13 @@ const Search = () => {
                         }
                         disabled={page === 0 || loading}
                         className="btn btn-white border shadow-sm"
-                        aria-label="Previous page"
+                        aria-label="Trang trước"
                       >
                         <AiOutlineBackward />
                       </button>
 
                       <span className="small fw-semibold px-2">
-                        Page {page + 1} of {products.totalPages}
+                        Trang {page + 1} / {products.totalPages}
                       </span>
 
                       <button
@@ -402,7 +404,7 @@ const Search = () => {
                         }
                         disabled={page >= products.totalPages - 1 || loading}
                         className="btn btn-white border shadow-sm"
-                        aria-label="Next page"
+                        aria-label="Trang tiếp theo"
                       >
                         <AiFillForward />
                       </button>
@@ -412,7 +414,7 @@ const Search = () => {
                         onClick={() => setPage(products.totalPages - 1)}
                         disabled={page >= products.totalPages - 1 || loading}
                         className="btn btn-white border shadow-sm"
-                        aria-label="Last page"
+                        aria-label="Trang cuối"
                       >
                         <AiFillFastForward />
                       </button>
@@ -420,14 +422,13 @@ const Search = () => {
                   )}
                 </>
               ) : (
-                <div className="card border-0 shadow-sm rounded-4 text-center py-5 px-3">
+                <div className="card border-0 shadow-sm rounded-4 text-center py-5 px-3" role="status">
                   <i className="bi bi-laptop display-4 text-secondary"></i>
 
-                  <h5 className="fw-bold mt-3">No laptops found</h5>
+                  <h3 className="fw-bold mt-3">Không tìm thấy sản phẩm</h3>
 
                   <p className="text-secondary mb-4">
-                    Try changing your filters to find products that match your
-                    needs.
+                    Hãy thử thay đổi bộ lọc để tìm sản phẩm phù hợp hơn.
                   </p>
 
                   <button
@@ -435,14 +436,14 @@ const Search = () => {
                     className="btn btn-primary rounded-pill px-4 align-self-center"
                     onClick={handleReset}
                   >
-                    View all laptops
+                    Xem tất cả sản phẩm
                   </button>
                 </div>
               )}
             </section>
           </div>
         </div>
-      </div>
+      </main>
     </UserLayout>
   );
 };

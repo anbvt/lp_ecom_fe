@@ -27,7 +27,11 @@ const SideBar = ({ isOpen, onNavigate }: SideBarProps) => {
                     aria-label="Đóng menu quản trị"
                 />
             )}
-            <aside className={`admin-sidebar${isOpen ? " admin-sidebar--open" : ""}`}>
+            <aside
+                id="admin-sidebar"
+                className={`admin-sidebar${isOpen ? " admin-sidebar--open" : ""}`}
+                aria-label="Menu quản trị"
+            >
                 <div className="admin-sidebar__section-label">MENU QUẢN LÝ</div>
                 <nav aria-label="Điều hướng quản trị">
                     <ul className="admin-sidebar__nav">

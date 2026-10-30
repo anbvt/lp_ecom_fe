@@ -1,4 +1,8 @@
 /* Laptop filter sidebar */
+.laptop-search__loading {
+  min-height: 300px;
+}
+
 .laptop-filter {
   position: sticky;
   top: 90px;
@@ -24,8 +28,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: #f0edff;
-  color: #6351ce;
+  background: #eef4ff;
+  color: #2563eb;
   font-size: 21px;
 }
 
@@ -44,7 +48,7 @@
 .laptop-filter__clear {
   border: 0;
   background: transparent;
-  color: #6351ce;
+  color: #2563eb;
   font-size: 12px;
   font-weight: 650;
   white-space: nowrap;
@@ -53,7 +57,7 @@
 }
 
 .laptop-filter__clear:hover {
-  color: #4330ad;
+  color: #1748b5;
   text-decoration: underline;
 }
 
@@ -101,14 +105,14 @@
 }
 
 .laptop-filter__group select:hover {
-  border-color: #c9c1fa;
+  border-color: #b7c9f8;
   background-color: #ffffff;
 }
 
 .laptop-filter__group select:focus {
-  border-color: #6351ce;
+  border-color: #2563eb;
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(99, 81, 206, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .laptop-filter__submit {
@@ -117,11 +121,11 @@
   margin-top: 2px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #7160dc, #5743bf);
+  background: #2563eb;
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
-  box-shadow: 0 5px 14px rgba(99, 81, 206, 0.22);
+  box-shadow: 0 5px 14px rgba(37, 99, 235, 0.16);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -130,7 +134,7 @@
 
 .laptop-filter__submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(99, 81, 206, 0.3);
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
 }
 
 .laptop-filter__submit:disabled {

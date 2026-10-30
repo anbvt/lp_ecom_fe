@@ -4,9 +4,10 @@ import "./index.css";
 
 interface AdminNavbarProps {
     onMenuToggle: () => void;
+    isMenuOpen: boolean;
 }
 
-const Navbar = ({ onMenuToggle }: AdminNavbarProps) => {
+const Navbar = ({ onMenuToggle, isMenuOpen }: AdminNavbarProps) => {
     const [, , removeCookie] = useCookies(["admin"]);
     const navigate = useNavigate();
 
@@ -22,7 +23,9 @@ const Navbar = ({ onMenuToggle }: AdminNavbarProps) => {
                     className="admin-topbar__menu-toggle"
                     type="button"
                     onClick={onMenuToggle}
-                    aria-label="Mở menu quản trị"
+                    aria-controls="admin-sidebar"
+                    aria-expanded={isMenuOpen}
+                    aria-label={isMenuOpen ? "Đóng menu quản trị" : "Mở menu quản trị"}
                 >
                     <i className="bi bi-list"></i>
                 </button>
